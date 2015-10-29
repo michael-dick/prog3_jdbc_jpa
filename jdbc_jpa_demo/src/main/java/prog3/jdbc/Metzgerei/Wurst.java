@@ -7,11 +7,11 @@ public class Wurst {
 
     private int plu;
 
-    private String articleName;
+    private String bezeichnung;
 
-    private double stockKg;
+    private double kilopreis;
 
-    private double pricePerKg;
+    private double kilobestand;
 
     //Constructors
 
@@ -19,17 +19,17 @@ public class Wurst {
     public Wurst() {
     }
 
-    public Wurst(String articleName, double stockKg, double pricePerKg) {
-        this.articleName = articleName;
-        this.stockKg = stockKg;
-        this.pricePerKg = pricePerKg;
+    public Wurst(String bezeichnung, double kilopreis, double kilobestand) {
+        this.bezeichnung = bezeichnung;
+        this.kilopreis = kilopreis;
+        this.kilobestand = kilobestand;
     }
 
-    public Wurst(int plu, String articleName, double stockKg, double pricePerKg) {
+    public Wurst(int plu, String bezeichnung, double kilopreis, double kilobestand) {
         this.plu = plu;
-        this.articleName = articleName;
-        this.stockKg = stockKg;
-        this.pricePerKg = pricePerKg;
+        this.bezeichnung = bezeichnung;
+        this.kilopreis = kilopreis;
+        this.kilobestand = kilobestand;
     }
 
     //Getter and Setter
@@ -43,37 +43,37 @@ public class Wurst {
         this.plu = plu;
     }
 
-    public String getArticleName() {
-        return articleName;
+    public String getBezeichnung() {
+        return bezeichnung;
     }
 
-    public void setArticleName(String articleName) {
-        this.articleName = articleName;
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
     }
 
-    public double getStockKg() {
-        return stockKg;
+    public double getKilopreis() {
+        return kilopreis;
     }
 
-    public void setStockKg(double stockKg) {
-        this.stockKg = stockKg;
+    public void setKilopreis(double kilopreis) {
+        this.kilopreis = kilopreis;
     }
 
-    public double getPricePerKg() {
-        return pricePerKg;
+    public double getKilobestand() {
+        return kilobestand;
     }
 
-    public void setPricePerKg(double pricePerKg) {
-        this.pricePerKg = pricePerKg;
+    public void setKilobestand(double kilobestand) {
+        this.kilobestand = kilobestand;
     }
 
     @Override
     public String toString() {
         return "Wurst{" +
                 "plu=" + plu +
-                ", articleName='" + articleName + '\'' +
-                ", stockKg=" + stockKg +
-                ", pricePerKg=" + pricePerKg +
+                ", bezeichnung='" + bezeichnung + '\'' +
+                ", kilopreis=" + kilopreis +
+                ", kilobestand=" + kilobestand +
                 '}';
     }
 }
