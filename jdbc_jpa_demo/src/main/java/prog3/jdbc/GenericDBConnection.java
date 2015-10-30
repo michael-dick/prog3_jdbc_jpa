@@ -4,7 +4,7 @@ import java.sql.*;
 
 /**
  * Created by MichaelDick on 28/10/15.
- * We use this abstacr class for providing the methods connect(String dbName) and disconnect()
+ * We use this abstract class for providing the methods connect(String dbName) and disconnect()
  * the other methods are kept abstract so the logic still has to be implemented
  */
 
@@ -70,6 +70,7 @@ public abstract class GenericDBConnection<KEY , TYPE> {
 
     /**
      * Updates an existing entity in the DB
+     * IMPORTANT: always provide all attributes except from the primary key
      * @param identifier the primary key
      * @param update the entity with the new attributes
      */
