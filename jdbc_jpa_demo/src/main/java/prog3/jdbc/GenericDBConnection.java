@@ -19,6 +19,11 @@ public abstract class GenericDBConnection<KEY , TYPE> {
     //java.sql.PreparedStatement lets us set parameters(?) in our query to keep the query dynamic
     public PreparedStatement mPreparedStatement;
 
+
+    /**
+     * Connects to the mySQL DB specified in the name
+     * @param dbName the name of the DB
+     */
     public void connect(String dbName){
         //load jdbc driver --> unnecessary beacause we use maven
         try {
@@ -44,6 +49,9 @@ public abstract class GenericDBConnection<KEY , TYPE> {
         }
     }
 
+    /**
+     * Disconnects from the connected DB
+     */
     public void disconnect(){
         try {
             connection.close();
@@ -53,11 +61,32 @@ public abstract class GenericDBConnection<KEY , TYPE> {
         }
     }
 
-    public abstract void post(TYPE entity);
+    /**
+     * Inserts a new Java-Object into the database
+     * @param entity the object to insert
+     */
+    public abstract void insert(TYPE entity);
 
+
+    /**
+     * Updates an existing entity in the DB
+     * @param identifier the primary key
+     * @param update the entity with the new attributes
+     */
     public abstract void update (KEY identifier , TYPE update);
 
+
+    /**
+     * Deletes an existing entity
+     * @param identifier the primary key
+     */
     public abstract void delete(KEY identifier);
 
-    public abstract ResultSet search(KEY identifier) throws Exception;
+    /**
+     * Searches an entity
+     * @param identifier the primary key
+     * @return the result set
+     * @throws SQLException
+     */
+    public abstract ResultSet search(KEY identifier) throws SQLException;
 }
