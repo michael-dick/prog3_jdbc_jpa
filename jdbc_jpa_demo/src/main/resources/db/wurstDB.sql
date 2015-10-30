@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 30. Okt 2015 um 15:12
+-- Erstellungszeit: 30. Okt 2015 um 19:26
 -- Server-Version: 10.0.17-MariaDB
 -- PHP-Version: 5.6.14
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `wurstDB`
 --
+CREATE DATABASE IF NOT EXISTS `wurstDB` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `wurstDB`;
 
 -- --------------------------------------------------------
 

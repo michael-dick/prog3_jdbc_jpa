@@ -6,7 +6,6 @@
 	<persistence-unit name="jdbc_jpa_demo" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
-		//Entities
 		<class>prog3.jpa.Student</class>
 		<class>prog3.jpa.KITCard</class>
 

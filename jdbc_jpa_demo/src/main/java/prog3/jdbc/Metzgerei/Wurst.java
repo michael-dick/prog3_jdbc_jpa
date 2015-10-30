@@ -1,7 +1,7 @@
 package prog3.jdbc.Metzgerei;
 
 /**
- * Created by MichaelDick on 29/10/15.
+ * Created by MichaelDick and Philipp Ratz on 29/10/15.
  */
 public class Wurst {
 
@@ -14,7 +14,6 @@ public class Wurst {
     private double kilobestand;
 
     //Constructors
-
 
     public Wurst() {
     }

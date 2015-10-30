@@ -26,7 +26,9 @@ public abstract class GenericDBConnection<KEY, TYPE> {
      * @param dbName the name of the DB
      */
     public void connect(String dbName) {
-//        //load jdbc driver --> unnecessary beacause we use maven
+
+        //Would be necessary if we didn't use Maven
+//
 //        try {
 //            Class.forName("com.mysql.jdbc.Driver").newInstance();
 //            System.out.println("driver loaded");
