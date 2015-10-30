@@ -35,10 +35,12 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
             System.out.println("Primary key already exists!");
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            //Dont forget to always disconnect after an operation
+            disconnect();
         }
 
-        //Dont forget to always disconnect after an operation
-        disconnect();
+
     }
 
     @Override
@@ -56,9 +58,13 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
             mPreparedStatement.setDouble(2 , newKilopreis);
             mPreparedStatement.setDouble(3 , newKilobestand);
 
+            mPreparedStatement.setInt(4 , identifier);
+
             mPreparedStatement.executeUpdate();
         }catch (SQLException s){
             s.printStackTrace();
+        }finally {
+            disconnect();
         }
 
     }
@@ -74,10 +80,18 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
             mPreparedStatement.executeUpdate();
         }catch (SQLException s){
             s.printStackTrace();
+        }finally {
+            disconnect();
         }
 
     }
 
+    /**
+     * NOTICE: close connection after using this method
+     * @param identifier the primary key
+     * @return
+     * @throws SQLException
+     */
     @Override
     public ResultSet search(Integer identifier) throws SQLException {
         //We want to return an resultset, so we can print information out at the console
@@ -90,8 +104,56 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
 
         result = mPreparedStatement.executeQuery();
 
-        disconnect();
 
         return result;
+    }
+
+
+    public void addToBestand(Integer identifier , Double amount){
+        Wurst update = new Wurst();
+        connect("wurstDB");
+
+        try {
+            ResultSet wurstFromDB = search(identifier);
+
+            wurstFromDB.next();
+            update.setBezeichnung(wurstFromDB.getString("bezeichnung"));
+            update.setKilopreis(wurstFromDB.getDouble("kilopreis"));
+
+            //add amount
+            update.setKilobestand(wurstFromDB.getDouble("kilobestand") + amount);
+
+            update(identifier , update);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        disconnect();
+    }
+
+    public void removeFromBestand(Integer identifier , Double amount){
+        Wurst update = new Wurst();
+        connect("wurstDB");
+
+        try {
+            ResultSet wurstFromDB = search(identifier);
+
+            wurstFromDB.next();
+            update.setBezeichnung(wurstFromDB.getString("bezeichnung"));
+            update.setKilopreis(wurstFromDB.getDouble("kilopreis"));
+
+            double bestand = wurstFromDB.getDouble("kilobestand") - amount;
+
+            //add amount
+            update.setKilobestand(bestand < 0 ? 0 : bestand);
+
+            update(identifier , update);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        disconnect();
     }
 }

@@ -8,7 +8,7 @@ import java.sql.*;
  * the other methods are kept abstract so the logic still has to be implemented
  */
 
-public abstract class GenericDBConnection<KEY , TYPE> {
+public abstract class GenericDBConnection<KEY, TYPE> {
 
     //java.sql.Connection etabished the connection to our target database
     public Connection connection;
@@ -22,17 +22,18 @@ public abstract class GenericDBConnection<KEY , TYPE> {
 
     /**
      * Connects to the mySQL DB specified in the name
+     *
      * @param dbName the name of the DB
      */
-    public void connect(String dbName){
-        //load jdbc driver --> unnecessary beacause we use maven
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            System.out.println("driver loaded");
-        } catch (Exception ex) {
-            System.out.println("Driver: " + ex.getMessage());
-            System.out.println("Error: " + ex.toString());
-        }
+    public void connect(String dbName) {
+//        //load jdbc driver --> unnecessary beacause we use maven
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver").newInstance();
+//            System.out.println("driver loaded");
+//        } catch (Exception ex) {
+//            System.out.println("Driver: " + ex.getMessage());
+//            System.out.println("Error: " + ex.toString());
+//        }
 
         //Connection
         try {
@@ -51,8 +52,9 @@ public abstract class GenericDBConnection<KEY , TYPE> {
 
     /**
      * Disconnects from the connected DB
+     * NOTICE: Using this in a method which returns a java.sql.ResultSet closes the set before returning
      */
-    public void disconnect(){
+    public void disconnect() {
         try {
             connection.close();
             System.out.println("disconnected");
@@ -63,30 +65,35 @@ public abstract class GenericDBConnection<KEY , TYPE> {
 
     /**
      * Returns all entries in the table
-     * @param dbName the name of the DB
+     * NOTICE: disconnect after using this method
+     *
+     * @param dbName    the name of the DB
      * @param tableName the name of the table
      * @return a java.sql.ResultSet of the entries in the table
      */
-    public ResultSet findAll(String dbName , String tableName){
+    public ResultSet findAll(String dbName, String tableName) {
         ResultSet result = null;
 
         connect(dbName);
 
         try {
+            mStatement = connection.createStatement();
+
             String query = "SELECT * FROM " + tableName + ";";
 
             result = mStatement.executeQuery(query);
+
+            return result;
         } catch (SQLException e) {
             e.printStackTrace();
+            //would be null
+            return result;
         }
-
-        disconnect();
-
-        return result;
     }
 
     /**
      * Inserts a new Java-Object into the database
+     *
      * @param entity the object to insert
      */
     public abstract void insert(TYPE entity);
@@ -95,20 +102,23 @@ public abstract class GenericDBConnection<KEY , TYPE> {
     /**
      * Updates an existing entity in the DB
      * IMPORTANT: always provide all attributes except from the primary key
+     *
      * @param identifier the primary key
-     * @param update the entity with the new attributes
+     * @param update     the entity with the new attributes
      */
-    public abstract void update (KEY identifier , TYPE update);
+    public abstract void update(KEY identifier, TYPE update);
 
 
     /**
      * Deletes an existing entity
+     *
      * @param identifier the primary key
      */
     public abstract void delete(KEY identifier);
 
     /**
      * Searches an entity
+     *
      * @param identifier the primary key
      * @return the result set
      * @throws SQLException
