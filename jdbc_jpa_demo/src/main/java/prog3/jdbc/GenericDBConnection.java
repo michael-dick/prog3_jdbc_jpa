@@ -62,6 +62,30 @@ public abstract class GenericDBConnection<KEY , TYPE> {
     }
 
     /**
+     * Returns all entries in the table
+     * @param dbName the name of the DB
+     * @param tableName the name of the table
+     * @return a java.sql.ResultSet of the entries in the table
+     */
+    public ResultSet findAll(String dbName , String tableName){
+        ResultSet result = null;
+
+        connect(dbName);
+
+        try {
+            String query = "SELECT * FROM " + tableName + ";";
+
+            result = mStatement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        disconnect();
+
+        return result;
+    }
+
+    /**
      * Inserts a new Java-Object into the database
      * @param entity the object to insert
      */
