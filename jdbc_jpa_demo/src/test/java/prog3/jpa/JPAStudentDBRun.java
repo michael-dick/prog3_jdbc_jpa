@@ -1,5 +1,7 @@
 package prog3.jpa;
 
+import org.junit.Test;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,8 +17,8 @@ public class JPAStudentDBRun {
     //Create EntityManager
     public static EntityManager em = emf.createEntityManager();
 
-    public static void main(String[] args){
-
+    @Test
+    public void testCreateStudent() throws Exception{
         //Create Student
         Student michi = new Student(1641518 , "Michael" , "Dick" , "ukdyn@student.kit.edu");
 
@@ -36,23 +38,24 @@ public class JPAStudentDBRun {
                 em.getTransaction().rollback();
         }
 
+        michi =  em.find(Student.class , 1641518);
+        System.out.println(michi);
+    }
+
+    @Test
+    public void testDeleteStudent() throws Exception{
+        Student michi = em.find(Student.class, 1641518);
 
         try {
             em.getTransaction().begin();
-            michi.getKitCard().setDeposit(20);
-            em.merge(michi);
+            em.remove(michi);
             em.getTransaction().commit();
         }finally {
-            if(em.getTransaction().isActive())
+            if (em.getTransaction().isActive())
                 em.getTransaction().rollback();
         }
-
-        michi =  em.find(Student.class , 1641518);
-        System.out.println(michi);
-
-
-
-
     }
+
+
 
 }
