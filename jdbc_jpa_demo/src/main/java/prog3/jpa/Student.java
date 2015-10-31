@@ -3,7 +3,7 @@ package prog3.jpa;
 import javax.persistence.*;
 
 /**
- * Created by MichaelDick on 28/10/15.
+ * Created by MichaelDick and Philipp Ratz on 31/10/15.
  */
 @Entity
 public class Student {

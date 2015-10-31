@@ -3,7 +3,7 @@ package prog3.jdbc;
 import java.sql.*;
 
 /**
- * Created by MichaelDick on 28/10/15.
+ * Created by MichaelDick and Philipp Ratz on 31/10/15.
  * We use this abstract class for providing the methods connect(String dbName) and disconnect()
  * the other methods are kept abstract so the logic still has to be implemented
  */

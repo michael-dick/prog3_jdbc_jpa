@@ -7,13 +7,13 @@ import prog3.jdbc.Metzgerei.WurstDBConnection;
 import java.sql.ResultSet;
 
 /**
- * Created by MichaelDick on 29/10/15.
+ * Created by MichaelDick and Philipp Ratz on 31/10/15.
  */
 public class WurstDBRun {
 
     /**
      * We use the jUnit framework to seperately run queries
-     * No more information at this point since this is another topic in the seminar
+     * No more information at this point since jUnit is another topic in the seminar
      */
     WurstDBConnection connection = new WurstDBConnection();
 
