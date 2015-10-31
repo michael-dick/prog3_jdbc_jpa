@@ -35,7 +35,7 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
             System.out.println("Primary key already exists!");
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             //Dont forget to always disconnect after an operation
             disconnect();
         }
@@ -54,16 +54,16 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
         connect("wurstDB");
         try {
             mPreparedStatement = connection.prepareStatement("UPDATE wurst SET bezeichnung = ?, kilopreis = ?, kilobestand = ? WHERE plu = ?");
-            mPreparedStatement.setString(1 , newBezeichnung);
-            mPreparedStatement.setDouble(2 , newKilopreis);
-            mPreparedStatement.setDouble(3 , newKilobestand);
+            mPreparedStatement.setString(1, newBezeichnung);
+            mPreparedStatement.setDouble(2, newKilopreis);
+            mPreparedStatement.setDouble(3, newKilobestand);
 
-            mPreparedStatement.setInt(4 , identifier);
+            mPreparedStatement.setInt(4, identifier);
 
             mPreparedStatement.executeUpdate();
-        }catch (SQLException s){
+        } catch (SQLException s) {
             s.printStackTrace();
-        }finally {
+        } finally {
             disconnect();
         }
 
@@ -75,12 +75,12 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
 
         try {
             mPreparedStatement = connection.prepareStatement("DELETE FROM wurst WHERE plu = ?");
-            mPreparedStatement.setInt(1 , identifier);
+            mPreparedStatement.setInt(1, identifier);
 
             mPreparedStatement.executeUpdate();
-        }catch (SQLException s){
+        } catch (SQLException s) {
             s.printStackTrace();
-        }finally {
+        } finally {
             disconnect();
         }
 
@@ -88,6 +88,7 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
 
     /**
      * NOTICE: close connection after using this method
+     *
      * @param identifier the primary key
      * @return
      * @throws SQLException
@@ -100,7 +101,7 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
         connect("wurstDB");
 
         mPreparedStatement = connection.prepareStatement("SELECT * FROM wurst WHERE plu = ?");
-        mPreparedStatement.setInt(1 , identifier);
+        mPreparedStatement.setInt(1, identifier);
 
         result = mPreparedStatement.executeQuery();
 
@@ -109,7 +110,7 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
     }
 
 
-    public void addToBestand(Integer identifier , Double amount){
+    public void addToBestand(Integer identifier, Double amount) {
         Wurst update = new Wurst();
         connect("wurstDB");
 
@@ -123,7 +124,7 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
             //add amount
             update.setKilobestand(wurstFromDB.getDouble("kilobestand") + amount);
 
-            update(identifier , update);
+            update(identifier, update);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +133,7 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
         disconnect();
     }
 
-    public void removeFromBestand(Integer identifier , Double amount){
+    public void removeFromBestand(Integer identifier, Double amount) {
         Wurst update = new Wurst();
         connect("wurstDB");
 
@@ -148,7 +149,7 @@ public class WurstDBConnection extends GenericDBConnection<Integer, Wurst> {
             //add amount
             update.setKilobestand(bestand < 0 ? 0 : bestand);
 
-            update(identifier , update);
+            update(identifier, update);
 
         } catch (SQLException e) {
             e.printStackTrace();

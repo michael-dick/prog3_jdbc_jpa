@@ -18,12 +18,12 @@ public class JPAStudentDBRun {
     public static EntityManager em = emf.createEntityManager();
 
     @Test
-    public void testCreateStudent() throws Exception{
+    public void testCreateStudent() throws Exception {
         //Create Student
-        Student michi = new Student(1641518 , "Michael" , "Dick" , "ukdyn@student.kit.edu");
+        Student michi = new Student(1641518, "Michael", "Dick", "ukdyn@student.kit.edu");
 
         //Create KIT Card
-        KITCard michisCard = new KITCard(0 , michi);
+        KITCard michisCard = new KITCard(0, michi);
 
         michi.setKitCard(michisCard);
 
@@ -33,29 +33,28 @@ public class JPAStudentDBRun {
             em.getTransaction().begin();
             em.persist(michi);
             em.getTransaction().commit();
-        }finally {
-            if(em.getTransaction().isActive())
+        } finally {
+            if (em.getTransaction().isActive())
                 em.getTransaction().rollback();
         }
 
-        michi =  em.find(Student.class , 1641518);
+        michi = em.find(Student.class, 1641518);
         System.out.println(michi);
     }
 
     @Test
-    public void testDeleteStudent() throws Exception{
+    public void testDeleteStudent() throws Exception {
         Student michi = em.find(Student.class, 1641518);
 
         try {
             em.getTransaction().begin();
             em.remove(michi);
             em.getTransaction().commit();
-        }finally {
+        } finally {
             if (em.getTransaction().isActive())
                 em.getTransaction().rollback();
         }
     }
-
 
 
 }

@@ -19,8 +19,6 @@ public class KITCard {
     private Student student;
 
     //Constructors
-
-
     public KITCard() {
     }
 
@@ -30,7 +28,6 @@ public class KITCard {
     }
 
     //getter and setter
-
     public int getId() {
         return id;
     }

@@ -19,11 +19,11 @@ public class WurstDBRun {
 
 
     @Test
-    public void testFindAll() throws Exception{
+    public void testFindAll() throws Exception {
 
-        ResultSet resultSet = connection.findAll("wurstDB" , "wurst");
+        ResultSet resultSet = connection.findAll("wurstDB", "wurst");
 
-        while (resultSet.next()){
+        while (resultSet.next()) {
             System.out.println(resultSet.getInt("plu"));
             System.out.println(resultSet.getString("bezeichnung"));
             System.out.println(resultSet.getDouble("kilopreis"));
@@ -35,7 +35,7 @@ public class WurstDBRun {
     }
 
     @Test
-    public void testSearch() throws Exception{
+    public void testSearch() throws Exception {
         ResultSet resultSet = connection.search(999);
         //We only have one result
         resultSet.next();
@@ -52,8 +52,8 @@ public class WurstDBRun {
     }
 
     @Test
-    public void testInsert() throws Exception{
-        Wurst nuernberger = new Wurst(004 , "Nuernberger" , 13.65 , 101.6);
+    public void testInsert() throws Exception {
+        Wurst nuernberger = new Wurst(004, "Nuernberger", 13.65, 101.6);
 
         connection.insert(nuernberger);
 
@@ -61,7 +61,7 @@ public class WurstDBRun {
     }
 
     @Test
-    public void testUpdate() throws Exception{
+    public void testUpdate() throws Exception {
         Wurst update = new Wurst();
 
         ResultSet oldWurst = connection.search(001);
@@ -71,17 +71,16 @@ public class WurstDBRun {
         update.setKilobestand(oldWurst.getDouble("kilobestand"));
         update.setKilopreis(oldWurst.getDouble("kilopreis"));
 
-        connection.update(001 , update);
+        connection.update(001, update);
 
         testFindAll();
 
     }
 
 
-
     @Test
-    public void testAddToBestand() throws Exception{
-        connection.addToBestand(001 , 25.4);
+    public void testAddToBestand() throws Exception {
+        connection.addToBestand(001, 25.4);
 
         ResultSet resultSet = connection.search(001);
         resultSet.next();
@@ -94,7 +93,7 @@ public class WurstDBRun {
     }
 
     @Test
-    public void testDelete() throws Exception{
+    public void testDelete() throws Exception {
         connection.delete(004);
     }
 
