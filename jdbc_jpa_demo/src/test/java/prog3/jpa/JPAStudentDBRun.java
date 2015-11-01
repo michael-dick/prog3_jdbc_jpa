@@ -18,20 +18,10 @@ public class JPAStudentDBRun extends AbstractDBRun {
 
         michi.setKitCard(michisCard);
 
-        //Surround with try-finally to make sure the transaction is rolled back if something goes wrong
-
-        try
-
-        {
             em.getTransaction().begin();
             em.persist(michi);
             em.getTransaction().commit();
-        } finally
 
-        {
-            if (em.getTransaction().isActive())
-                em.getTransaction().rollback();
-        }
 
         michi = em.find(Student.class, 1641518);
         System.out.println(michi);
