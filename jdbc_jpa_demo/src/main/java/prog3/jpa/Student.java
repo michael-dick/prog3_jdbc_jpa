@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Student {
 
 
-    @Id //don't use value generator in this case, since Matrikelnummer is unique
+    @Id
     @Column(name = "STUDENT_ID")
     private int matnr;
 

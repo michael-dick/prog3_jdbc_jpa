@@ -1,5 +1,6 @@
 package prog3.jdbc;
 
+import org.junit.Test;
 import prog3.AbstractDBRun;
 import prog3.jdbc.Metzgerei.Wurst;
 import prog3.jdbc.Metzgerei.WurstDBConnection;
@@ -11,7 +12,7 @@ import java.sql.ResultSet;
  */
 public class WurstDBRun extends AbstractDBRun{
 
-
+    @Test
     public static void testFindAll() throws Exception {
 
         ResultSet resultSet = wurstDBConnection.findAll("wurstDB", "wurst");
@@ -26,7 +27,7 @@ public class WurstDBRun extends AbstractDBRun{
         wurstDBConnection.disconnect();
 
     }
-
+    @Test
     public static void testSearch() throws Exception {
         ResultSet resultSet = wurstDBConnection.search(999);
         //We only have one result
@@ -42,7 +43,7 @@ public class WurstDBRun extends AbstractDBRun{
 
         wurstDBConnection.disconnect();
     }
-
+    @Test
     public static void testInsert() throws Exception {
         Wurst nuernberger = new Wurst(004, "Nuernberger", 13.65, 101.6);
 
@@ -50,7 +51,7 @@ public class WurstDBRun extends AbstractDBRun{
 
         testFindAll();
     }
-
+    @Test
     public static void testUpdate() throws Exception {
         Wurst update = new Wurst();
 
@@ -67,7 +68,7 @@ public class WurstDBRun extends AbstractDBRun{
 
     }
 
-
+    @Test
     public static void testAddToBestand() throws Exception {
         wurstDBConnection.addToBestand(001, 25.4);
 

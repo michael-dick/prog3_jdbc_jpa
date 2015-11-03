@@ -28,14 +28,14 @@ public abstract class GenericDBConnection<KEY, TYPE> {
     public void connect(String dbName) {
 
         //Would be necessary if we didn't use Maven
-//
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver").newInstance();
-//            System.out.println("driver loaded");
-//        } catch (Exception ex) {
-//            System.out.println("Driver: " + ex.getMessage());
-//            System.out.println("Error: " + ex.toString());
-//        }
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            System.out.println("driver loaded");
+        } catch (Exception ex) {
+            System.out.println("Driver: " + ex.getMessage());
+            System.out.println("Error: " + ex.toString());
+        }
 
         //Connection
         try {

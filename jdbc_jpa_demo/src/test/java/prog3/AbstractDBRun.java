@@ -17,11 +17,6 @@ public abstract class AbstractDBRun {
     public static WurstDBConnection wurstDBConnection = new WurstDBConnection();
 
     //Needed for JPA
-    //Create EntityManagerFactory
-    public static EntityManagerFactory emf = Persistence
-            .createEntityManagerFactory("jdbc_jpa_demo");
 
-    //Create EntityManager
-    public static EntityManager em = emf.createEntityManager();
 
 }
